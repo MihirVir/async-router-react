@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useLoaderData, defer, Await } from "react-router";
-import delay from "../util/delay";
+import { loader } from "./main-loader";
 import { MainContainer, MainHeading } from "./styled-elements";
 
 const Main = () => {
@@ -18,8 +18,4 @@ const Main = () => {
   );
 };
 
-async function loader() {
-  return defer({ promise: delay("Fecthed Data", 1000) });
-}
-
-export const mainRoute = { element: <Main />, loader };
+export default Main;

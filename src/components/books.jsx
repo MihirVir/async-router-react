@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { useLoaderData, defer, Await } from "react-router";
+import { useLoaderData, defer, Await, useAsyncValue } from "react-router";
 import delay from "../util/delay";
 import { MainHeading } from "./styled-elements";
 
@@ -22,12 +22,17 @@ const Books = () => {
         <strong>Authors:</strong>{" "}
         <Suspense fallback="Fetching..">
           <Await resolve={authorsPromise}>
-            {(data) => <strong>{data}</strong>}
+            <Authors />
           </Await>
         </Suspense>
       </p>
     </div>
   );
+};
+
+const Authors = () => {
+  const authors = useAsyncValue();
+  return <strong>{authors}</strong>;
 };
 
 function loader() {
